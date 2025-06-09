@@ -8,10 +8,15 @@ let energy = 100;
 
 const calcEnergy = memoize((enrg) => Math.max(0, enrg - 25));
 
+const getMood = memoize((hunger, energy) => {
+  const moods = [];
+});
+
 function updateStatus() {
   let sleepStatus =
     energy <= 25 ? "Pet wants to sleep" : "Pet is full of energy";
   let hungerStatus = hunger >= 50 ? "Pet is hungry" : "Pet doesn`t want to eat";
+  let mood = getMood(hunger, energy);
 
   const statusMessage = `Pet's hunger now is ${hunger}. ${hungerStatus}. The level of energy: ${energy}. ${sleepStatus}.\n`;
 
