@@ -10,6 +10,10 @@ const calcEnergy = memoize((enrg) => Math.max(0, enrg - 25));
 
 const getMood = memoize((hunger, energy) => {
   const moods = [];
+  if (hunger > 80) moods.push("angry");
+  if (energy < 20) moods.push("tired");
+  if (moods.length === 0) return "happy";
+  return moods.join(" and ");
 });
 
 function updateStatus() {
