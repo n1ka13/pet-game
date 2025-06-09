@@ -22,14 +22,14 @@ function updateStatus() {
 function feed() {
   hunger = Math.max(0, hunger - 15);
   updateStatus();
-  petEvents.emit("Feed");
+  petEvents.emit("feed");
   log("HUNGER", `hunger=${hunger}`);
 }
 
 function sleep() {
-  energy = Math.max(100, energy + 30);
+  energy = Math.min(100, energy + 30);
   updateStatus();
-  petEvents.emit("Sleep");
+  petEvents.emit("sleep");
   log("SLEEP", `energy=${energy}`);
 }
 
@@ -37,7 +37,7 @@ function play() {
   energy = calcEnergy(energy);
   hunger += 5;
   updateStatus();
-  petEvents.emit("Play");
+  petEvents.emit("play");
   log("PLAY", `energy=${energy}`, `hunger=${hunger}`);
 }
 
