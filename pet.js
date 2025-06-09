@@ -40,3 +40,8 @@ function play() {
   petEvents.emit("Play");
   log("PLAY", `energy=${energy}`, `hunger=${hunger}`);
 }
+
+function showStatus() {
+  const stream = fs.createReadStream("pet_status.txt", "utf-8");
+  stream.on("data", (chunk) => console.log(`Status:\n` + chunk));
+}
