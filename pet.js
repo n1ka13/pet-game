@@ -65,4 +65,4 @@ function startLife() {
   petEvents.on("tick", () => showStatus());
 }
 
-module.exports = { feed, sleep, play, tick };
+module.exports = { feed, sleep, play, showStatus, startLife };
