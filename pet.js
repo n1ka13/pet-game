@@ -22,7 +22,7 @@ function updateStatus() {
   let hungerStatus = hunger >= 50 ? "Pet is hungry" : "Pet doesn`t want to eat";
   let mood = getMood(hunger, energy);
 
-  const statusMessage = `Pet's hunger now is ${hunger}. ${hungerStatus}. The level of energy: ${energy}. ${sleepStatus}.\n`;
+  const statusMessage = `Pet's hunger now is ${hunger}. ${hungerStatus}. The level of energy: ${energy}. ${sleepStatus}.\n Pet is ${mood} at the moment.`;
 
   fs.writeFile("pet_status.txt", statusMessage, (err) => {
     if (err) console.error("Error writing status:", err);
