@@ -15,3 +15,5 @@ function memoize(fn, ttl = 10 * 60 * 1000) {
     return result;
   };
 }
+
+module.exports = memoize;
