@@ -1,6 +1,7 @@
 const memoize = require("./memoize.js");
 const log = require("./logger.js");
 const petEvents = require("./events.js");
+const fs = require("fs");
 
 let hunger = 0;
 let energy = 100;
