@@ -1,0 +1,1 @@
+Pet's hunger now is 0. Pet doesn`t want to eat. The level of energy: 80. Pet is full of energy.

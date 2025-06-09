@@ -21,7 +21,7 @@ function updateStatus() {
 }
 
 function feed() {
-  hunger = Math.max(0, hunger - 15);
+  hunger = Math.min(0, hunger + 10);
   updateStatus();
   petEvents.emit("feed");
   log("HUNGER", `hunger=${hunger}`);
@@ -48,6 +48,7 @@ function showStatus() {
 }
 
 function startLife() {
+  updateStatus();
   setInterval(() => {
     hunger += 10;
     energy = Math.max(0, energy - 10);
@@ -63,7 +64,9 @@ function startLife() {
   petEvents.on("play", () =>
     console.log("Pet has played a bit and now is a bit tired")
   );
-  petEvents.on("tick", () => showStatus());
+  petEvents.on("tick", () =>
+    console.log("Ticks every 5 seconds from beginning")
+  );
 }
 
 module.exports = { feed, sleep, play, showStatus, startLife };

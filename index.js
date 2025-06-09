@@ -4,7 +4,7 @@ const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  prompt: "Enter comand - feed/sleep/play/tick: ",
+  prompt: "Enter comand - feed/sleep/play/pet: ",
 });
 
 startLife();
@@ -24,12 +24,12 @@ rl.on("line", (line) => {
     case "play":
       play();
       break;
-    case "tick":
+    case "pet":
       showStatus();
       break;
     default:
       console.log(
-        "Unknown command, try one of this: feed or sleep or play or tick"
+        "Unknown command, try one of this: feed or sleep or play or pet"
       );
   }
 });
