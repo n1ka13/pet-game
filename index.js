@@ -8,3 +8,28 @@ const rl = readline.createInterface({
 });
 
 startLife();
+
+rl.prompt();
+
+rl.on("line", (line) => {
+  const command = line.trim().toLowerCase();
+
+  switch (command) {
+    case "feed":
+      feed();
+      break;
+    case "sleep":
+      sleep();
+      break;
+    case "play":
+      play();
+      break;
+    case "tick":
+      showStatus();
+      break;
+    default:
+      console.log(
+        "Unknown command, try one of this: feed or sleep or play or tick"
+      );
+  }
+});
