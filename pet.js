@@ -45,3 +45,24 @@ function showStatus() {
   const stream = fs.createReadStream("pet_status.txt", "utf-8");
   stream.on("data", (chunk) => console.log(`Status:\n` + chunk));
 }
+
+function startLife() {
+  setInterval(() => {
+    hunger += 10;
+    energy = Math.max(0, energy - 10);
+    petEvents.emit("tick");
+  }, 5000);
+
+  petEvents.on("feed", () =>
+    console.log("Pet has eaten and now is a bit happier")
+  );
+  petEvents.on("sleep", () =>
+    console.log("Pet has slept and now has more energy")
+  );
+  petEvents.on("play", () =>
+    console.log("Pet has played a bit and now is a bit tired")
+  );
+  petEvents.on("tick", () => showStatus());
+}
+
+module.exports = { feed, sleep, play, tick };
