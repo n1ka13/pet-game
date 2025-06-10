@@ -66,6 +66,25 @@ function showStatus() {
   stream.on("data", (chunk) => console.log(`Status:\n` + chunk));
 }
 
+function analyzeHistory() {
+  console.log("Analysis: \n");
+
+  let totalEnergy = 0;
+  let entriesCount = 0;
+  let starvingCount = 0;
+
+  if (!fs.existsSync("pet_history.log")) {
+    return console.log(
+      "History is clear, please use some commands: feed/play/sleep"
+    );
+  }
+
+  const rl = readline.createInterface({
+    input: fs.createReadStream("pet_history.log"),
+    crlfDelay: Infinity,
+  });
+}
+
 function startLife() {
   updateStatus();
   setInterval(() => {
