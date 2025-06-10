@@ -83,6 +83,20 @@ function analyzeHistory() {
     input: fs.createReadStream("pet_history.log"),
     crlfDelay: Infinity,
   });
+
+  rl.on("line", (line) => {
+    if (!line.trim()) return;
+
+    const parts = line.split(", ");
+    if (parts.length !== 4) return;
+
+    const hunger = parseFloat(parts[2].split("=")[1]);
+    const energy = parseFloat(parts[3].split("=")[1]);
+
+    totalEnergy += energy;
+    entriesCount++;
+    if (hunger > 80) starvingCount++;
+  });
 }
 
 function startLife() {
