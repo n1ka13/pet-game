@@ -16,6 +16,13 @@ const getMood = memoize((hunger, energy) => {
   return moods.join(" and ");
 });
 
+function logHistory(action = "tick") {
+  const logEntry = `${new Date().toISOString()}, ${action}, hunger=${hunger}, energy=${energy}\n`;
+  fs.appendFile("pet_history.log", logEntry, { flag: "a" }, (err) => {
+    if (err) console.error("Error writing history");
+  });
+}
+
 function updateStatus() {
   let sleepStatus =
     energy <= 25 ? "Pet wants to sleep" : "Pet is full of energy";
@@ -32,6 +39,7 @@ function updateStatus() {
 function feed() {
   hunger = Math.min(0, hunger + 10);
   updateStatus();
+  logHistory("feed");
   petEvents.emit("feed");
   log("HUNGER", `hunger=${hunger}`);
 }
@@ -39,6 +47,7 @@ function feed() {
 function sleep() {
   energy = Math.min(100, energy + 30);
   updateStatus();
+  logHistory("sleep");
   petEvents.emit("sleep");
   log("SLEEP", `energy=${energy}`);
 }
@@ -47,6 +56,7 @@ function play() {
   energy = calcEnergy(energy);
   hunger += 5;
   updateStatus();
+  logHistory("play");
   petEvents.emit("play");
   log("PLAY", `energy=${energy}`, `hunger=${hunger}`);
 }
