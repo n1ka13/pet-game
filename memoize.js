@@ -7,7 +7,11 @@ function memoize(fn, ttl = 10 * 60 * 1000) {
 
     if (cache.has(key)) {
       const { time, result } = cache.get(key);
-      if (now - time < ttl) return result;
+      if (now - time < ttl) {
+        return result;
+      } else {
+        cache.delete("key");
+      }
     }
 
     const result = fn(...args);
