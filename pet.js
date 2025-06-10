@@ -2,6 +2,7 @@ const memoize = require("./memoize.js");
 const log = require("./logger.js");
 const petEvents = require("./events.js");
 const fs = require("fs");
+const readline = require("readline");
 
 let hunger = 0;
 let energy = 100;
@@ -75,7 +76,7 @@ function analyzeHistory() {
 
   if (!fs.existsSync("pet_history.log")) {
     return console.log(
-      "History is clear, please use some commands: feed/play/sleep"
+      "History is clear, please use some commands: feed/play/sleep/analyze"
     );
   }
 
@@ -103,10 +104,9 @@ function analyzeHistory() {
       return console.log("No data for analyzing");
     }
 
-    console.log(`Average energy: ${(totalEnergy/entriesCount).toFixed(2)}`);
-    console.log(`Starving count (>80): ${starvingCount}`;
-      console.log(`Entries count: ${entriesCount}`);
-    )
+    console.log(`Average energy: ${(totalEnergy / entriesCount).toFixed(2)}`);
+    console.log(`Starving count (>80): ${starvingCount}`);
+    console.log(`Entries count: ${entriesCount}`);
   });
 }
 
@@ -115,6 +115,7 @@ function startLife() {
   setInterval(() => {
     hunger += 10;
     energy = Math.max(0, energy - 10);
+    logHistory();
     petEvents.emit("tick");
   }, 5000);
 
@@ -132,4 +133,4 @@ function startLife() {
   );
 }
 
-module.exports = { feed, sleep, play, showStatus, startLife };
+module.exports = { feed, sleep, play, showStatus, startLife, analyzeHistory };

@@ -1,10 +1,17 @@
-const { feed, sleep, play, showStatus, startLife } = require("./pet.js");
+const {
+  feed,
+  sleep,
+  play,
+  showStatus,
+  startLife,
+  analyzeHistory,
+} = require("./pet.js");
 const readline = require("readline");
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  prompt: "Enter comand - feed/sleep/play/pet: ",
+  prompt: "Enter comand - feed/sleep/play/pet/analyze: ",
 });
 
 startLife();
@@ -27,9 +34,12 @@ rl.on("line", (line) => {
     case "pet":
       showStatus();
       break;
+    case "analyze":
+      analyzeHistory();
+      break;
     default:
       console.log(
-        "Unknown command, try one of this: feed or sleep or play or pet"
+        "Unknown command, try one of this: feed or sleep or play or pet or analyze"
       );
   }
 });
