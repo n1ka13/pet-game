@@ -97,6 +97,17 @@ function analyzeHistory() {
     entriesCount++;
     if (hunger > 80) starvingCount++;
   });
+
+  rl.on("close", () => {
+    if (entriesCount === 0) {
+      return console.log("No data for analyzing");
+    }
+
+    console.log(`Average energy: ${(totalEnergy/entriesCount).toFixed(2)}`);
+    console.log(`Starving count (>80): ${starvingCount}`;
+      console.log(`Entries count: ${entriesCount}`);
+    )
+  });
 }
 
 function startLife() {
